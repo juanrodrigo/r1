@@ -37,7 +37,11 @@
     foreach ($recientes as $d): ?>
         <tr>
             <td width="130" >
-                <a href="/documento/editar/<?php echo $d['id'];?>"><?php echo substr($d['codigo'],0,-13);?><br/><?php echo substr($d['codigo'],-13);?></a>                
+            <?php if ($d['tipo'] == 'Fucov'):?>
+                <a href="/pyv/editar/<?php echo $d['id'];?>"><?php echo substr($d['codigo'],0,-13);?><br/><?php echo substr($d['codigo'],-13);?></a>            
+            <?php else:?>
+                <a href="/documento/editar/<?php echo $d['id'];?>"><?php echo substr($d['codigo'],0,-13);?><br/><?php echo substr($d['codigo'],-13);?></a>
+            <?php endif;?>    
             </td>
             
             <td ><b><?php echo $d['tipo'];?></b></td>

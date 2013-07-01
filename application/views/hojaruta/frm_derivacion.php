@@ -49,7 +49,7 @@ function ajaxs(oficial)
         $.ajax({
 	            type: "POST",
 	            data: { tipo: tipo, oficial:oficial, destino: destinatario, adjunto : adjunto, document: document, nur : nur, accion: accion, proveido: proveido, hijo: hijo, user: user, adjunto:adjunto,id_seg:id_seg,estado:estado,urgente:urgente },
-	            url: "/codice/ajax/derivar",
+	            url: "/ajax/derivar",
 	            dataType: "json",
 	            success: function(item)
 	            {   
@@ -131,7 +131,7 @@ $('table#theTable :checkbox').live("click",function(){
         $.ajax({
 	            type: "POST",
 	            data: { id: id, destino: destino,oficial:oficial,document : document },
-	            url: "/codice/ajax/eliminar",
+	            url: "/ajax/eliminar",
 	            dataType: "json",
 	            success: function(item)
 	            {   

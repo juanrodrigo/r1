@@ -89,7 +89,7 @@ $('#crear').click(function(){
 </script>
 <h2 class="subtitulo">Crear <?php echo $documento->tipo;?> <br/><span>LLENE CORRECTAMENTE LOS DATOS EN EL FORMULARIO</span></h2>
 <div class="formulario">
-    <form action="/codice/documento/crear/<?php echo $documento->action;?>" method="post" id="frmCreate">
+    <form action="/documento/crear/<?php echo $documento->action;?>" method="post" id="frmCreate">
     <br/>
     <fieldset>
         <?php if($tipo->tipo=='Carta'):

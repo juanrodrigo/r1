@@ -152,22 +152,21 @@
     }
 
 </style>
-<h2 class="subtitulo">Editar <?php echo $documento->codigo; ?> - <b><?php echo $documento->nur; ?></b><br/><span> Editar documento <?php echo $documento->codigo; ?> </span></h2>
+<h2 class="subtitulo">Editar <?php echo $documento->codigo; ?> - <b><?php echo $documento->nur; ?></b><br/><span> Editar Fucov <?php echo $documento->codigo; ?> </span></h2>
 <div class="tabs">
     <ul class="tabNavigation">
         <li><a href="#editar">Edición</a></li>
-        <li><a href="#adjuntos">Adjuntos</a></li>        
+        <li><a href="#declaratoria">Declaratoria en Comisi&oacute;n</a></li>        
     </ul>
-    <div id="editar"> 
-
-        <div class="formulario"  >  
-            <div style="border-bottom: 1px solid #ccc; background: #F2F7FC; display: block; padding: 10px 0;   width: 100%;  ">    
-                <a href="#" class="link save" id="save" title="Guardar cambios hechos al documento" > Guardar</a>
-                | <a href="/pdf/<?php echo $tipo->action ?>.php?id=<?php echo $documento->id; ?>" class="link pdf" target="_blank" title="Imprimir PDF" >PDF</a>
-                |  
-                <?php if ($documento->estado == 1): ?> 
-                    <a href="/seguimiento/?nur=<?php echo $documento->nur; ?>" class="link derivar" title="Ver seguimiento" >Derivado</a>      
-                <?php else: ?>
+<div id="editar"> 
+    <div class="formulario"  >  
+        <div style="border-bottom: 1px solid #ccc; background: #F2F7FC; display: block; padding: 10px 0;   width: 150.8%;">    
+            <a href="#" class="link save" id="save" title="Guardar cambios hechos al documento" > Guardar</a>
+            | <a href="/pdf/<?php echo $tipo->action ?>.php?id=<?php echo $documento->id; ?>" class="link pdf" target="_blank" title="Imprimir PDF" >PDF</a>
+            |  
+            <?php if ($documento->estado == 1): ?> 
+                <a href="/seguimiento/?nur=<?php echo $documento->nur; ?>" class="link derivar" title="Ver seguimiento" >Derivado</a>      
+            <?php else: ?>
                     <a href="/hojaruta/derivar/?id_doc=<?php echo $documento->id; ?>" class="link derivar" title="Derivar a partir del documento, si ya esta derivado muestra el seguimiento" >Derivar</a>      
                 <?php endif; ?>
                 <?php
@@ -177,7 +176,7 @@
                     |  <a href="/word/print.php?id=<?php echo $documento->id; ?>" class="link word" target="_blank" title="Editar este documento en word" >Editar en Word</a>       
 <?php endif; ?>
             </div>
-            <form action="/documento/editar/<?php echo $documento->id; ?>" method="post" id="frmEditar" >  
+            <form action="/pyv/editar/<?php echo $documento->id; ?>" method="post" id="frmEditar" >  
 <?php if (sizeof($mensajes) > 0): ?>
                     <div class="info">
                         <p><span style="float: left; margin-right: .3em;" class="ui-icon-info"></span>
@@ -229,7 +228,7 @@ echo Form::label('destinatario', 'Cargo Destinatario:', array('class' => 'form')
 echo Form::input('cargo_des', $documento->cargo_destinatario, array('id' => 'cargo_des', 'size' => 45, 'class' => 'required'));
 ?>
                                 </p> 
-<?php if ($documento->id_tipo == 5): ?>
+<?php /* if ($documento->id_tipo == 5): ?>
                                     <p>
                                         <label>Institución Destinatario</label>
                                         <input type="text" size="40" value="<?php echo $documento->institucion_destinatario; ?>" name="institucion_des" />    
@@ -242,13 +241,13 @@ echo Form::input('cargo_des', $documento->cargo_destinatario, array('id' => 'car
                                     <p>
     <?php
     echo Form::label('via', 'Via:', array('class' => 'form'));
-    echo Form::input('via', $documento->nombre_via, array('id' => 'via', 'size' => 45/* ,'class'=>'required' */));
+    echo Form::input('via', $documento->nombre_via, array('id' => 'via', 'size' => 45));
     ?>
                                         <?php
                                         echo Form::label('cargovia', 'Cargo Via:', array('class' => 'form'));
-                                        echo Form::input('cargovia', $documento->cargo_via, array('id' => 'cargovia', 'size' => 45/* ,'class'=>'required' */));
+                                        echo Form::input('cargovia', $documento->cargo_via, array('id' => 'cargovia', 'size' => 45));
                                         ?>
-                                    <?php endif; ?>
+                                    <?php endif; */?>
 
                                 </p>
                             </td>
@@ -256,15 +255,17 @@ echo Form::input('cargo_des', $documento->cargo_destinatario, array('id' => 'car
                                 <p>
                                     <?php
                                     echo Form::label('remitente', 'Nombre del remitente: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mosca', array('class' => 'form'));
-                                    echo Form::input('remitente', $user->nombre, array('id' => 'remitente', 'size' => 32, 'class' => 'required'));
+                                    //echo Form::input('remitente', $user->nombre, array('id' => 'remitente', 'size' => 32, 'class' => 'required'));
+                                    echo Form::input('remitente', $documento->nombre_remitente, array('id' => 'remitente', 'size' => 32, 'class' => 'required'));
                                     ?>            
                                     <?php
                                     //  echo Form::label('mosca','Mosca:');
-                                    echo Form::input('mosca', $user->mosca, array('id' => 'mosca', 'size' => 4));
+                                    //echo Form::input('mosca', $user->mosca, array('id' => 'mosca', 'size' => 4));
+                                    echo Form::input('mosca', $documento->mosca_remitente, array('id' => 'mosca', 'size' => 4));
                                     ?>
                                     <?php
                                     echo Form::label('cargo', 'Cargo Remitente:', array('class' => 'form'));
-                                    echo Form::input('cargo_rem', $user->cargo, array('id' => 'cargo_rem', 'size' => 45, 'class' => 'required'));
+                                    echo Form::input('cargo_rem', $documento->cargo_remitente, array('id' => 'cargo_rem', 'size' => 45, 'class' => 'required'));
                                     ?>
 <?php
 echo Form::label('adjuntos', 'Adjunto:', array('class' => 'form'));
@@ -280,7 +281,7 @@ echo Form::input('copias', $documento->copias, array('id' => 'adjuntos', 'size' 
 
 
                             <td rowspan="2" style="padding-left: 5px;">
-                                        <?php echo Form::label('dest', 'Mis destinatarios:'); ?>
+                                        <?php /* echo Form::label('dest', 'Mis destinatarios:'); ?>
                                 <div id="vias">
                                     <ul>
 
@@ -300,7 +301,7 @@ echo Form::input('copias', $documento->copias, array('id' => 'adjuntos', 'size' 
                                         <li class="<?php // echo $v['genero'] ?>"><?php //echo HTML::anchor('#',$v['nombre'],array('class'=>'destino','nombre'=>$v['nombre'],'title'=>$v['cargo'],'cargo'=>$v['cargo'],'via'=>'','cargo_via'=>'')); ?></li>
 <?php //}  ?>
                                     </ul>
-                                </div>
+                                </div><?php */?>
                             </td>
 
 
@@ -339,40 +340,174 @@ echo Form::textarea('descripcion', $documento->contenido, array('id' => 'descrip
                 </fieldset>
 
             </form>
-        </div>
-    </div>
-    <div id="adjuntos">
-        <div class="formulario">        
-            <form method="post" enctype="multipart/form-data" action="" >
-                <label>Selecione un archivo para subir...</label>
-                <input type="file" class="file" name="archivo"/>                 
-                <input type="hidden" name="id_doc" value="<?php echo $documento->id; ?>"/>
-                <input type="submit" name="adjuntar" value="subir"/>
-            </form>        
-            <div style="clear: both;">
-
-            </div>
-            <h2 style="text-align:center;">Archivos Adjuntos </h2><hr/>
-            <table id="theTable">
-                <thead>
-                    <tr>
-                        <th>NOMBRE ARCHIVO</th>
-                        <th>TAMA&Ntilde;O</th>
-                        <th>FECHA DE SUBIDA</th>
-                        <th>ACCION</th>
-                    </tr>
-                </thead>
-                <tbody>                
-<?php foreach ($archivos as $a): ?>
-                        <tr>
-                            <td><a href="/descargar.php/?id=<?php echo $a->id; ?>"><?php echo substr($a->nombre_archivo, 13) ?></a></td>
-                            <td align="center"><?php echo number_format(($a->tamanio / 1024) / 1024, 2) . ' MB'; ?></td>
-                            <td align="center"><?php echo $a->fecha ?></td>
-                            <td align="center"><a href="/archivo/eliminar/<?php echo $a->id; ?>" class="link delete">Eliminar</a></td>
-                        </tr>
-<?php endforeach; ?>
-                </tbody>
-            </table>    
-        </div>
-    </div>
+</div>
+</div>
+<div id="declaratoria"> 
+<div class="formulario"  > 
+<div style="border-bottom: 1px solid #ccc; background: #F2F7FC; display: block; padding: 10px 0;   width: 150.8%;  ">    
+<h2 align="center">Informaci&oacute;n del Memor&aacute;ndun</h2>
+<br />
+<fieldset>
+<table width="100%" border="1px">
+    <tr>
+        <td>
+            <p>
+                <?php                  
+                echo Form::label('areas', 'Area Funcional:',array('class'=>'form'));                
+                ?>
+                </p>
+        </td>
+        <td>
+        <select name="areas" id="areas" class="required" style="width: 400px;"><option value="" selected="true"></option>
+            <?php foreach($areafuncional as $v=>$value){
+                if ($v == $fucov->id_area_funcional)
+                    echo '<option value="'.$v.'" selected>'.$value.'</option>';
+                else
+                    echo '<option value="'.$v.'">'.$value.'</option>';
+                }?>    
+        </select>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <?php 
+                echo Form::label('funcionario','Funcionario en Comisi&oacute;n',array('class'=>'form'));
+            ?>
+        </td>
+        <td>                
+        <select id="funcionario" name="funcionario" style="width: 400px;" class="required" ><option value="" selected="true"></option>
+            <?php foreach($usercomision as $v=>$value){
+                if ($v == $fucov->id_user_comision)
+                    echo '<option value="'.$v.'" selected>'.$value.'</option>';
+                else
+                    echo '<option value="'.$v.'">'.$value.'</option>';
+                }?>
+        </select>                
+        </td>
+        
+    </tr>
+    <tr>
+    <td><?php
+                echo Form::label('cargo','Cargo del Funcionario',array('class'=>'form'));
+            ?>
+        </td>
+        <td>
+            <input id="cargo" name="cargo" type="text" class="required" size="75" value="<?php echo $fucov->cargo_user_comision; ?>"/>            
+        </td>
+    </tr>   
+    <tr>
+        <td>
+            <?php
+                echo Form::label('autorizadoPor','Autorizado por:',array('class'=>'form'));                
+            ?> 
+        </td>
+        <td>            
+            <select id="autorizadoPor" name="autorizadoPor" style="width: 400px;" class="required" ><option value="" selected="true"></option>
+            <?php  foreach ($aut as $d):?> 
+            <?php if($fucov->id_area_inmediato_superior == $d['id']) $sel = 'selected';
+                  else $sel = '';?>
+                        <option value="<?php echo $d['id'];?>" <?php echo $sel;?> ><?php  echo $d['oficina'];?></option>                          
+            <?php   endforeach; ?>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <?php
+                echo Form::label('superior','Inmediato Superior:',array('class'=>'form'));                
+            ?> 
+        </td>
+        <td>            
+            <select id="superior" name="superior" style="width: 400px;" class="required" ><option value="" selected="true"></option></select>
+            <input type="hidden" id="nombreSuperior" name="nombreSuperior" />
+        </td>
+        
+    </tr>
+    <tr>
+        <td><?php
+                echo Form::label('cargosuperior','Cargo Inmediato Superior:',array('class'=>'form'));
+            ?> 
+        </td>
+                <td>            
+            <input id="cargoSuperior" name="cargoSuperior" class="required" type="text" size="75"/>
+        </td>
+    </tr>
+    <tr>
+        <td><?php
+                echo Form::label('finicios','Fecha de Inicio de Comici&oacute;n:',array('class'=>'form'));
+            ?> 
+        </td>
+        <td>
+            <input type="text" name="finicio" id="finicio" class="required" value="<?php echo $fucov->fecha_ini_comision;?>"/>
+        </td>
+    </tr>
+    <tr>
+        <td><?php
+                echo Form::label('hinicio','Hora de Inicio de Comisi&oacute;n:',array('class'=>'form'));
+            ?> 
+        </td>
+        <td>
+            <select name="hinicio" id="hinicio" class="required"><option value="" selected="true"></option>
+            <?php for($i=8; $i<=23 ; $i++){
+                    for($j=0;$j<60;$j+=30){
+                        if($i<10){$h="0".$i;}else{$h=$i;}
+                        if($j<10){$m="0".$j;}else{$m=$j;}
+                        //echo '<option value="'.$i.'">'.$h.":".$m.'</option>';
+                        echo '<option value="'.$h.":".$m.'">'.$h.":".$m.'</option>';
+                    }
+                }?>    
+            </select>            
+        </td>
+    </tr>
+    <tr>
+        <td><?php
+                echo Form::label('fconclusion','Fecha de concluci&oacute;n Comici&oacute;n:',array('class'=>'form'));
+            ?> 
+        </td>
+        <td>
+            <input type="text" name="fconclusion" id="fconclusion" class="required" value="<?php //echo date('D d-m-Y');?>"/>
+        </td>
+    </tr>
+    <tr>
+        <td><?php
+                echo Form::label('hconclusion','Hora de conclusi&oacute;n Comisi&oacute;n:',array('class'=>'form'));
+            ?> 
+        </td>
+        <td><select name="hconclusion" id="hconclusion" class="required"><option value="" selected="true"></option>
+            <?php for($i=8; $i<=23 ; $i++){
+                    for($j=0;$j<60;$j+=30){
+                        if($i<10){$h="0".$i;}else{$h=$i;}
+                        if($j<10){$m="0".$j;}else{$m=$j;}
+                        echo '<option value="'.$h.":".$m.'">'.$h.":".$m.'</option>';
+                    }
+                }?>    
+            </select>
+        </td>
+    </tr><!--
+    <tr>
+        <td><?php
+                echo Form::label('resolucion','Resoluci&oacute;n Ministerial/Presidencial:',array('class'=>'form'));
+            ?> 
+        </td>
+        <td><?php
+                echo Form::input('resolucion');
+            ?>
+        </td>
+    </tr>
+    <tr>
+        <td><?php
+                echo Form::label('fresolucion','Fecha Resoluci&oacute;n:',array('class'=>'form'));
+            ?> 
+        </td>
+        <td><?php
+                echo Form::input('fresolucion');
+            ?>
+        </td>
+    </tr>-->
+</table>
+<!--(*) Si no cuenta con el Registro Beneficiario Sigma, la Unidad Financiera no podr&aacute; realizar el pago de vi&aacute;ticos anticipado.-->
+</fieldset>
+</div>
+</div>
+</div><!--Fin declaratoria-->
 </div>

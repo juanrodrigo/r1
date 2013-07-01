@@ -6,14 +6,14 @@
 	var top=screen.availHeight;
 	left=(left-800)/2;
 	top=(top-500)/2;
-	var res=window.showModalDialog("/codice/admin/content/destinos/"+id_user,"","center:0;dialogWidth:750px;dialogHeight:450px;scroll=yes;resizable=yes;status=yes;"+"dialogLeft:"+left+"px;dialogTop:"+top+"px");
+	var res=window.showModalDialog("/admin/content/destinos/"+id_user,"","center:0;dialogWidth:750px;dialogHeight:450px;scroll=yes;resizable=yes;status=yes;"+"dialogLeft:"+left+"px;dialogTop:"+top+"px");
         if(res!=null)
             {
                 $("#destinatarios").addClass('loading');
                 $.ajax({                    
 	            type: "POST",
 	            data: { destinos : res, id : id_user },
-	            url: "/codice/admin/ajax/addUser",
+	            url: "/admin/ajax/addUser",
 	           // dataType: "html",
 	            success: function(data)
 	            {                                                    
@@ -28,14 +28,14 @@
 	var top=screen.availHeight;
 	left=(left-800)/2;
 	top=(top-500)/2;
-	var res=window.showModalDialog("/codice/admin/content/documentos/"+id_user,"","center:0;dialogWidth:750px;dialogHeight:450px;scroll=yes;resizable=yes;status=yes;"+"dialogLeft:"+left+"px;dialogTop:"+top+"px");
+	var res=window.showModalDialog("/admin/content/documentos/"+id_user,"","center:0;dialogWidth:750px;dialogHeight:450px;scroll=yes;resizable=yes;status=yes;"+"dialogLeft:"+left+"px;dialogTop:"+top+"px");
         if(res!=null)
             {
                 $("#documentos").addClass('loading');
                 $.ajax({                    
 	            type: "POST",
 	            data: { documentos : res, id : id_user },
-	            url: "/codice/admin/ajax/addDoc",
+	            url: "/admin/ajax/addDoc",
 	           // dataType: "html",
 	            success: function(data)
 	            {                                                    
@@ -128,7 +128,7 @@
     <hr/>
     <ul>
      <?php foreach ($documentos as $d):?>
-        <li><a href="/codice/admin/user/x_doc/?id_tipo=<?php echo $d->id;?>&id_user=<?php echo $user->id;?>" rel="<?php echo $d->tipo;?>" class="delDoc">[X]</a>
+        <li><a href="/admin/user/x_doc/?id_tipo=<?php echo $d->id;?>&id_user=<?php echo $user->id;?>" rel="<?php echo $d->tipo;?>" class="delDoc">[X]</a>
           <?php echo $d->tipo; ?>  
         </li>                   
      <?php endforeach; ?>   
@@ -141,7 +141,7 @@
     <hr/>
     <ul>
      <?php foreach ($destinatarios as $d):?>
-        <li><a href="/codice/admin/user/x_des/?id_des=<?php echo $d->id;?>&id_user=<?php echo $user->id;?>" class="delDes" rel="<?php echo $d->nombre;?>" >[x]</a>
+        <li><a href="/admin/user/x_des/?id_des=<?php echo $d->id;?>&id_user=<?php echo $user->id;?>" class="delDes" rel="<?php echo $d->nombre;?>" >[x]</a>
             <span><?php echo $d->nombre; ?></span> |   
           <?php echo $d->cargo; ?>  
         </li>                   

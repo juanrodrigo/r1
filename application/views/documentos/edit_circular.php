@@ -169,7 +169,7 @@
                     |  <a href="/word/print.php?id=<?php echo $documento->id; ?>" class="link word" target="_blank" title="Editar este documento en word" >Editar en Word</a>       
 <?php endif; ?>
             </div>
-            <form action="/codice/documento/editar/<?php echo $documento->id; ?>" method="post" id="frmEditar" >  
+            <form action="/documento/editar/<?php echo $documento->id; ?>" method="post" id="frmEditar" >  
 <?php if (sizeof($mensajes) > 0): ?>
                     <div class="info">
                         <p><span style="float: left; margin-right: .3em;" class="ui-icon-info"></span>

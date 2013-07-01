@@ -1,5 +1,5 @@
 <?php
-class db extends PDO {
+class pyvdb extends PDO {
    
     private $engine;
     private $host;
@@ -9,7 +9,7 @@ class db extends PDO {
    
     public function __construct(){
         $this->engine = 'mysql';
-        $this->host = 'localhost';
+        $this->host = 'localhost';        
         $this->database = 'codice';
         $this->user = 'codice';
         $this->pass = 'c0d1c3';

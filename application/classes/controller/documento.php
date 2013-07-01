@@ -63,6 +63,11 @@ class Controller_documento extends Controller_DefaultTemplate {
     }
 
     public function action_crear($t = '') {
+        ///
+        if ($t == 'fucov'){
+           $this->request->redirect('pyv/crear/'.$t);           
+           }
+        ///
         $tipo = ORM::factory('tipos', array('action' => $t));
         if ($tipo->loaded()) {
             if (isset($_POST['submit'])) {
@@ -211,6 +216,9 @@ class Controller_documento extends Controller_DefaultTemplate {
         }
         $documento = ORM::factory('documentos')->where('id', '=', $id)->find();
         if ($documento->loaded()) {
+        ///FUCOV
+            if($documento->id_tipo == 11 )
+                $this->request->redirect('pyv/detalle/'.$documento->id);                
             $ok = true;
             if ($documento->estado == 1) { //si esta derivado entonces el documento solo pueden ver aquellos quienes intevienen en el seguimiento
                 $ok = false;
